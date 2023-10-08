@@ -2,8 +2,8 @@
 # Part of AppJetty. See LICENSE file for full copyright and licensing details.
 
 {
-    'name': 'Clever All In One Report Templates',
-    'author': 'AppJetty',
+    'name': 'Plantillas de informes inteligentes todo en uno',
+    'author': '',
     'license': 'OPL-1',
     'version': '16.0.1.0.3',
     'category': 'Accounting',
@@ -14,14 +14,6 @@
         'stock',
         'purchase',
     ],
-    'website': 'https://www.appjetty.com',
-    'support': 'support@appjetty.com',
-    'description': '''Get Diverse Templates For PO/RFQ/SO/Delivery Note/Picking List In One Go!
-Professional templates , Professional Report Templates, Sales Order Report Template, Quotation Report Template,
-Purchase order Report Template, Purchase Requestion Template, Credit Memo Report Template, Picking List report Template,
-SO report template, Po Report Template
-''',
-    'summary': 'Get Diverse Templates For PO/RFQ/SO/Delivery Note/Picking List One Go!',
     'data': [
         'data/template_data.xml',
         'security/base_security.xml',
@@ -94,8 +86,6 @@ SO report template, Po Report Template
         'python': ['img2pdf', 'fpdf', 'num2words']
     },
     'images': ['static/description/splash-screen.png'],
-    'price': 99.00,
-    'currency': 'EUR',
     'installable': True,
     'auto_install': False,
     'web_preload': True,

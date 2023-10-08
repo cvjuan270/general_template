@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<t t-name="gexin_custom.exclusive_header_gexin_custom">
+        <div class="header" t-att-style="'font-family:'+o.company_id.font_id.family+';font-size:'+str(o.company_id.font_size)+'px;'">
+            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                <tbody>
+                    <tr>
+                        <td>
+                            <center>
+                                <table border="0" cellpadding="0" cellspacing="0" style="padding:0px 20px 0px 20px; margin:0; background:#fff; line-height:20px;" width="100%">
+                                    <tr>
+                                        <td align="left" colspan="2" t-attf-style="color:#{text_color or '#ffffff'}; padding:0 0px;" valign="top">
+                                            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                <tr>
+                                                    <td align="left" style="color:#4D4D4F; padding: 0px 15px; border-right: 1px solid #188DC7;" valign="middle">
+                                                        <img style="max-height: 80px; margin-top: 10%;" t-att-src="'data:image/png;base64,%s' % to_text(o.company_id.invoice_logo) or to_text(o.company_id.logo)" t-if="o.company_id.logo"/>
+                                                    </td>
+                                                    <td style="padding:10px 0 10px 10px; width:66%; line-height:16px;" valign="top">
+                                                        <p t-attf-style="text-transform:capitalize; color:#{theme_color or '#ffffff'}; font-weight:bold; margin:0; margin-bottom:1px;">OFICINA LIMA</p>
+                                                        <t t-call="gexin_custom.templates_company_details_gexin_custom"/>
+                                                    </td>
+                                                    <td align="right" style="font-size:14px; padding:0; width:50%;" valign="top">
+                                                        <h6 t-attf-style="background-color: #{o.company_id and o.company_id.theme_color or '#000000'}; color: #{o.company_id and o.company_id.theme_text_color or '#000000'}; text-align:center;font-weight:bold; text-transform:uppercase; padding: 20px 0px;width: 240px; border-radius: 10px; line-height:25px;">
+                                                            <span>RUC:
+                                                                <span t-esc="o.company_id.vat"/>
+                                                            </span> <br/>
+                                                            <t t-if="o.is_cpe">
+                                                                <span t-field="o.pe_doc_name"/>
+                                                            </t>
+                                                            <span t-if="o.type == 'out_invoice' and o.state == 'proforma2'">PRO-FORMA</span>
+                                                            <span t-if="o.type == 'out_invoice' and o.state == 'draft'">Draft Invoice</span>
+                                                            <span t-if="o.type == 'out_invoice' and o.state == 'cancel'">Cancelled Invoice</span>
+                                                            <span t-if="o.type == 'in_refund'">Vendor Refund</span>
+                                                            <span t-if="o.type == 'in_invoice'">Vendor Bill</span>
+                                                            <br/>
+                                                            <span t-field="o.name"/>
+                                                        </h6>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" style="height:5px;"/>
+                                    </tr>
+                                </table>
+                            </center>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </t>
