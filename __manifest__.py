@@ -13,6 +13,8 @@
         'delivery',
         'stock',
         'purchase',
+        'l10n_pe',
+        'stock_picking_invoice_link'
     ],
     'data': [
         'data/template_data.xml',

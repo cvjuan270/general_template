@@ -50,3 +50,183 @@
             </table>
         </div>
     </t>
+
+<data inherit_id="sistemerp_ereport_template.report_invoice_exclusive_main">
+        <xpath expr="//t[@t-call='sistemerp_ereport_template.exclusive_external_layout']" position="replace">
+            <t t-call="gexin_custom.exclusive_external_layout_gexin_custom">
+                <t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})"/>
+                <t t-set="theme_color" t-value="o.company_id and o.company_id.theme_color"/>
+                <t t-set="theme_text_color" t-value="o.company_id and o.company_id.theme_text_color"/>
+                <t t-set="company_color" t-value="o.company_id and o.company_id.company_color"/>
+                <t t-set="company_address_color" t-value="o.company_id and o.company_id.company_address_color"/>
+                <t t-set="customer_color" t-value="o.company_id and o.company_id.customer_color"/>
+                <t t-set="customer_address_color" t-value="o.company_id and o.company_id.customer_address_color"/>
+                <t t-set="text_color" t-value="o.company_id and o.company_id.text_color"/>
+                <div class="page" t-att-style="'font-family:'+o.company_id.font_id.family+';font-size:'+str(o.company_id.font_size)+'px;'">
+                    <t t-call="sistemerp_ereport_template.template_annul"/>
+                    <t t-call="sistemerp_ereport_template.template_watermark"/>
+                    <img src="/gexin_custom/static/src/img/m31.jpg" style="position:absolute; left:60px; top:2px; z-index:-1" width="85%" height="auto"/>
+                    <div class="oe_structure"/>
+<!--                    <br/>-->
+                    <div>
+                        <div style="padding:0px 20px 20px 20px; margin:0; text-transform:uppercase;" width="100%">
+                            <div>
+                                <div colspan="3" t-attf-style="height:5px; border-bottom: 1px solid #{theme_color or '#000000'};"/>
+                            </div>
+                            <tr>
+                                <td>
+                                    <center>
+                                        <table border="0" cellpadding="0" cellspacing="0" style="padding:0px 2px 0px 2px; margin:0;" width="100%">
+                                            <tr>
+                                                <td align="left" colspan="2" t-attf-style="color:#{text_color or '#ffffff'}; padding:0px 0px;" valign="top">
+                                                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                        <tr>
+                                                            <td align="left" style="color:#4D4D4F; padding: 0px 2px; border: 2px solid #ffffff;" valign="middle">
+                                                                <div t-attf-style="padding: 5px 10px; width: 420px; border: 2px solid #188DC7; border-radius: 8px;">
+                                                                    <span style="color:##4D4D4F;">Señor(es):
+                                                                    </span>
+                                                                    <t t-call="gexin_custom.invoice_templates_customer_details_dir_gexin_custom"/>
+                                                                </div>
+                                                            </td>
+                                                            <td align="left" style="color:#4D4D4F; padding: 0px 2px; border: 2px solid #ffffff;" valign="middle">
+                                                                <div t-attf-style="padding: 5px 10px; width: 420px; border: 2px solid #188DC7; border-radius: 8px;">
+                                                                    <span style="color:##4D4D4F;">Dirección:
+                                                                    </span>
+                                                                    <t t-call="gexin_custom.invoice_templates_customer_details_gexin_custom"/>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </center>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <center>
+                                        <table border="0" cellpadding="0" cellspacing="0" style="padding:0px 2px 0px 2px; margin:0; background:#fff;" width="100%">
+                                            <tr>
+                                                <td align="left" colspan="2" t-attf-style="color:#{text_color or '#ffffff'}; padding:0px 0px;" valign="top">
+                                                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                        <tr>
+                                                            <td align="left" style="color:#4D4D4F; padding: 0px 2px; border: 2px solid #ffffff; font-size:6px; font-weight:bold;" valign="middle">
+                                                                <div t-attf-style="padding: 5px 5px; width: 209px; border: 2px solid #188DC7; border-radius: 8px;">
+                                                                    <span style="color:#6F8192; font-size:7px;">Cta.Cte.Soles Banco de Crédito del Perú:</span><br/>
+                                                                    <center><span style="color:#262626; font-size:10px;">194-2359477-099</span></center>
+                                                                </div>
+                                                            </td>
+                                                            <td align="left" style="color:#4D4D4F; padding: 0px 0px; border: 2px solid #ffffff; font-size:6px; font-weight:bold;" valign="middle">
+                                                                <div t-attf-style="padding: 5px 5px; width: 209px; border: 2px solid #188DC7; border-radius: 8px;">
+                                                                    <span style="color:#6F8192; font-size:7px;">Cta.Cte.Soles Banco Continental:</span><br/>
+                                                                    <center><span style="color:#262626; font-size:10px;">0011-0521-0200321343-22</span></center>
+                                                                </div>
+                                                            </td>
+                                                            <td align="left" style="color:#4D4D4F; padding: 0px 0px; border: 2px solid #ffffff; font-size:6px; font-weight:bold;" valign="middle">
+                                                                <div t-attf-style="padding: 5px 5px; width: 209px; border: 2px solid #188DC7; border-radius: 8px;">
+                                                                    <span style="color:#6F8192; font-size:7px;">CCI Cte.Soles Banco de Crédito del Perú:</span><br/>
+                                                                    <center><span style="color:#262626; font-size:10px;">00219400235947709994</span></center>
+                                                                </div>
+                                                            </td>
+                                                            <td align="left" style="color:#4D4D4F; padding: 0px 2px; border: 2px solid #ffffff; font-size:6px; font-weight:bold;" valign="middle">
+                                                                <div t-attf-style="padding: 5px 5px; width: 209px; border: 2px solid #188DC7; border-radius: 8px;">
+                                                                    <span style="color:#6F8192; font-size:7px;">CCI Cte.Soles Banco Continental:</span><br/>
+                                                                    <center><span style="color:#262626; font-size:10px;">011-521-00020032134322</span></center>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </center>
+                                </td>
+                            </tr>
+                            <div align="left" style="color:#4D4D4F; padding:0px 2px 0px 2px; border: 2px solid #188DC7; border-radius: 8px;" valign="top">
+                                <table border="0" cellpadding="0" cellspacing="0" style="padding:0px 2px 0px 2px; margin:0;" width="100%">
+                                    <tr t-attf-style="color: #4D4D4F;" valign="top">
+
+                                        <td style="padding:5px 15px;">
+                                            <b>VENDEDOR(A):</b><br/>
+                                            <p class="m-0" t-field="o.invoice_user_id"/>
+                                        </td>
+                                        <td style="padding:5px 15px;">
+                                            <b>FECHA EMISIÓN:</b><br/>
+                                            <span t-esc="o._get_invoice_date()"/>
+                                        </td>
+
+                                        <td style="padding:5px 15px;">
+                                            <b>FECHA VCTO.:</b><br/>
+                                            <span t-esc="o._get_invoice_due_date()"/>
+                                        </td>
+
+                                        <td style="padding:5px 15px;">
+                                            <b>COND. DE PAGO:</b><br/>
+                                            <p class="m-0" t-field="o.invoice_payment_term_id"/>
+                                        </td>
+                                        <td style="padding:5px 15px;">
+                                            <b>N° GUÍA:</b><br/>
+                                            <p class="m-0" t-field="o.ref"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <div style="padding:20px 0px 0 0; font-weight:bold; width:100%;">
+                                <t t-call="gexin_custom.report_invoice_order_lines_gexin_custom"/>
+                            </div>
+
+                            <div class="pull-left" style="color: #{text_color or '#000000'}; padding-top:5px; width: 100%;">
+                                <t t-call="sistemerp_ereport_template.report_invoice_notes"/><br/>
+                            </div>
+
+                            <div style="background:#fff; line-height:1; border-bottom:1px solid #{'#959595'}" width="100%">
+                                <div style="width: 45%; float: left;">
+                                    <p><t t-call="sistemerp_ereport_template.template_total_amount_word"/></p>
+                                    <t t-if="o.is_cpe">
+                                        <p>
+                                            <strong>Resúmen: </strong><br/>
+                                            <span t-field="o.pe_digest"/>
+                                        </p>
+                                        <t t-foreach="o.pe_additional_property_ids.filtered(lambda val: val.code != '1000')" t-as="p">
+                                            <span t-field="p.value"/><br/>
+                                        </t>
+<!--                                        Representacion impresa de:-->
+<!--                                        <span t-field="o.pe_doc_name"/>-->
+<!--                                        ,<br/>consulte en-->
+<!--                                        <span t-field="o.company_id.website"/>-->
+                                    </t>
+                                </div>
+
+                                <div style="width: 20%; float: left;">
+                                    <t t-call="sistemerp_ereport_template.report_invoice_barcode"/>
+                                </div>
+
+                                <div style="width: 35%; float: right;">
+                                    <t t-call="gexin_custom.invoice_subtotal_tem_gexin_custom"/>
+                                    <div t-if="not o._get_reconciled_info_JSON_values()" style="width: 100%; text-align:right;">
+                                        <p t-att-style="'font-weight:bold; color:#000;  color: %s;' % (text_color) ">
+                                            Pago: Pendiente
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <t t-if="o.cuota_line_ids">
+                                <div style="padding:20px 0px 0 0; font-weight:bold; width:100%;">
+                                    <t t-call="gexin_custom.report_cuotas_gexin_custom"/>
+                                </div>
+                            </t>
+
+                            <div align="right" style="color: #{text_color or '#000000'};">
+                                <t t-call="sistemerp_ereport_template.report_invoice_signature"/>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="oe_structure"/>
+                </div>
+            </t>
+        </xpath>
+    </data>
