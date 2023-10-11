@@ -65,6 +65,7 @@
     </template>
     <template id="templates_watermark">
         <t t-if="o.company_id and o.company_id.is_show_watermark">
+
             <div class="watermark text-center" style="position:absolute; opacity:0.25; width:100%; height:auto; z-index:1000; -webkit-transform: rotate(-45deg); -moz-transform:rotate(-45deg); bottom:-600px; left:-100px;">
                 <t t-if="o.company_id.watermark == 'logo'">
                     <span style="max-height: 500px;" t-field="o.company_id.watermark_logo" t-options="{'widget':'image'}"/>

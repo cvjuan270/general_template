@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="invoice_templates_customer_details">
-        <!-- <td align="left" style="padding:15px 0px 0px 15px; width:50%; line-height:18px;" valign="top">-->
         <p t-attf-style="text-transform:capitalize; color: #{theme_color or '#ffffff'}; font-weight:bold; margin:0; margin-bottom:5px; padding:10px 0px 0px 0px;">
             <strong t-if="o.partner_shipping_id == o.partner_id">Invoicing and shipping address:</strong>
             <strong t-if="o.partner_shipping_id != o.partner_id">Invoicing address:</strong>
@@ -38,9 +37,7 @@
                 </t>
             </p>
         </t>
-        <!-- </td><td align="left" style="padding:15px 0px 0px 15px; width:50%; line-height:18px;" valign="top">-->
-        <!-- <t t-if="o.partner_shipping_id != o.partner_id"><p t-attf-style="text-transform:capitalize; color: #{theme_color or '#ffffff'}; font-weight:bold; margin:0; margin-bottom:5px;"><strong>Shipping address:</strong></p><span t-attf-style="text-transform:capitalize;padding:0px; margin:0; color: #{customer_color or '#ffffff'};"><t t-if="o.company_id and o.company_id.is_customer_bold"><strong><span t-field="o.partner_shipping_id"/></strong></t><t t-if="not o.company_id.is_customer_bold"><span t-field="o.partner_shipping_id"/></t></span><p t-attf-style="color: #{customer_address_color or '#ffffff'};"><span t-esc="o._get_street(o.partner_shipping_id)"/><br/><span t-esc="o._get_address_details(o.partner_shipping_id)"/><br/><t t-if="o.partner_shipping_id.mobile"><strong>Mobile: </strong><span t-field="o.partner_shipping_id.mobile"/><br/></t><t t-if="o.partner_shipping_id.email"><strong>Email: </strong><span t-field="o.partner_shipping_id.email"/><br/></t><t t-if="o.partner_shipping_id.vat"><strong>Vat: </strong><span t-field="o.partner_shipping_id.vat"/></t></p></t>-->
-        <!-- </td>-->
+
     </template>
     <template id="invoice_templates_customer_shipping_details">
         <p t-attf-style="text-transform:capitalize; color: #{theme_color or '#ffffff'}; font-weight:bold; margin:0; margin-bottom:5px; padding:10px 0px 0px 0px;"
@@ -113,10 +110,9 @@
     <!--  <template id="templates_customer_details"><div t-att-style="'margin:0; padding-top:0; color:'+customer_address_color+';'"><span t-esc="o._get_street(o.partner_id)"/><br/><span t-esc="o._get_address_details(o.partner_id)"/><br/><t t-if="o.partner_id.mobile"><strong>Mobile: </strong><span t-field="o.partner_id.mobile"/><br/></t><t t-if="o.partner_id.email"><strong>Email: </strong><span t-field="o.partner_id.email"/><br/></t><t t-if="o.partner_id.vat"><strong>TIN: </strong><span t-field="o.partner_id.vat"/><br/></t></div></template>-->
     <template id="template_watermark">
         <t t-if="o.company_id and o.company_id.is_show_watermark">
-            <div class="watermark text-center"
-                 style="position:absolute; opacity:0.25; width:100%; height:auto; z-index:1000; -webkit-transform: rotate(-45deg); -moz-transform:rotate(-45deg); bottom:-600px; left:-100px;">
+            <div class="watermark text-center" style="position:absolute; left:60px; top:2px; z-index:-1" width="85%"
+                 height="auto">
                 <t t-if="o.company_id.watermark == 'logo'">
-                    <!-- <img style="max-height: 500px; height:auto;" t-att-src="'data:image/png;base64,%s' %  to_text(o.company_id.watermark_logo)" t-if="o.company_id"/> -->
                     <span style="max-height: 500px;height:auto;" t-field="o.company_id.watermark_logo"
                           t-options="{'widget':'image'}"/>
                 </t>
@@ -136,6 +132,7 @@
             </span>
         </t>
     </template>
+
     <template id="report_invoice_order_lines">
         <t t-set="display_discount" t-value="any([l.discount for l in o.invoice_line_ids])"/>
         <table BORDERCOLOR="#{theme_color or '#000000'}" border="1" cellpadding="0" cellspacing="0"
@@ -243,7 +240,7 @@
                     <t t-if="l_even">
                         <t t-set="ol_color" t-value="o.company_id.odd_party_color"/>
                     </t>
-                    <tr t-att-style="'page-break-inside: avoid !important; color: %s; background-color: %s '%(text_color, ol_color)  ">
+                    <tr t-att-style="'page-break-inside: avoid !important; color: %s; background-color: %sB3 '%(text_color, ol_color)  ">
                         <td class="text-center"
                             t-att-style="'padding:5px 10px; border:0.5px solid #ccc !important; border-right:0px solid #ccc !important; '">
                             <span t-esc="l_index+1"/>
@@ -316,6 +313,7 @@
             </tbody>
         </table>
     </template>
+
     <template id="document_tax_totals_custom">
         <t t-foreach="tax_totals['subtotals']" t-as="subtotal">
             <tr class="border-black o_subtotal">
@@ -333,8 +331,7 @@
             <t t-call="general_template.tax_groups_totals_custom"/>
         </t>
 
-        <!--Total amount with all taxes-->
-        <!-- <tr class="border-black o_total"> -->
+
         <tr class="tm_gray_bg"
             t-attf-style="color: #{o.company_id and o.company_id.theme_text_color or '#000000'};font-weight:bold; background-color: #{o.company_id and o.company_id.theme_color or '#000000'};">
             <td><strong>Total</strong></td>
@@ -384,17 +381,17 @@
                 </p>
                 <p t-if="spot" t-esc="spot['spot_message']"/>
             </div>
-            <div class="col-4">
-                <p>
-                    <img t-if="extra_edi_vals" class="border border-dark"
-                         t-att-src="'/report/barcode/?barcode_type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('QR', extra_edi_vals['qr_str'], 150, 150)"/>
-                </p>
+            <div class="col-4" style="justify-content: center;align-items: center;">
+                <div style="text-align: center;">
+                    <img t-if="extra_edi_vals" class="p-2" style="background-color: #ffffff; border-radius:8px;"
+                         t-att-src="'/report/barcode/?barcode_type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('QR', extra_edi_vals['qr_str'], 100, 100)"/>
+                </div>
             </div>
             <div class="fix col-4"
                  t-att-style="'font-family:'+o.company_id.font_id.family+';font-size:'+str(o.company_id.font_size)+'px;'">
                 <div id="total1" class="rows">
                     <div t-attf-class="#{'col-12' if report_type != 'html' else 'col-sm-12 col-md-10'} ms-auto">
-                        <table class="table table-striped" style="page-break-inside: avoid;">
+                        <table class="table table-striped">
                             <!--Tax totals-->
                             <t t-set="tax_totals" t-value="o.tax_totals"/>
                             <t t-call="general_template.document_tax_totals_custom"/>
@@ -551,6 +548,58 @@
         <!-- </div> -->
     </template>
 
+    <template id="report_cuotas_custom">
+        <table BORDERCOLOR="#{theme_color or '#000000'}" border="1" cellpadding="0" cellspacing="0"
+               class="table table-bordered"
+               style="border:0.5px solid #ccc;  border-collapse: collapse; text-transform:capitalize; padding:15px;border-bottom:1px solid #ccc;"
+               width="100%">
+            <thead>
+                <tr t-attf-style="background-color: #{theme_color or '#000000'}; color: #{theme_text_color or '#000000'};">
+                    <td align="center"
+                        t-attf-style="padding:5px 10px; border:1px solid #{theme_color or '#000000'} !important; border-right:0px solid #{theme_color or '#000000'} !important; font-weight:bold;"
+                        width="10%">CUOTA</td>
+                    <td align="center"
+                        t-attf-style="padding:5px 10px; border:1px solid #{theme_color or '#000000'} !important; border-right:0px solid #{theme_color or '#000000'} !important; font-weight:bold;"
+                        width="20%">FECHA VENCIMIENTO</td>
+                    <td align="center"
+                        t-attf-style="padding:5px 10px; border:1px solid #{theme_color or '#000000'} !important; border-right:0px solid #{theme_color or '#000000'} !important; font-weight:bold;"
+                        width="30%">IMPORTE</td>
+                    <td align="center"
+                        t-attf-style="padding:5px 10px; border:1px solid #{theme_color or '#000000'} !important; border-right:0px solid #{theme_color or '#000000'} !important; font-weight:bold;"
+                        width="30%">MONEDA</td>
+                </tr>
+            </thead>
+            <tbody>
+                <t t-set="spot1" t-value="o._l10n_pe_edi_get_spot()"/>
+                <t t-set="first_time" t-value="True"/>
+                <t t-foreach="o.line_ids.filtered(lambda l: l.account_type == 'asset_receivable')" t-as="rec_line">
+                    <t t-set="amount" t-value="rec_line.amount_currency"/>
+                    <t t-if="spot1 and first_time">
+                        <t t-set="amount" t-value="amount-spot1['spot_amount']"/>
+                    </t>
+                    <t t-set="first_time" t-value="False"/>
+                    <tr t-att-style="'color: %s'">
+                        <td class="text-center"
+                            t-att-style="'padding:5px 10px; border:0.5px solid #ccc !important; border-right:0px solid #ccc !important; '">
+                            <span t-out="rec_line_index+1"/>
+                        </td>
+                        <td class="text-center"
+                            t-att-style="'padding:5px 10px; border:0.5px solid #ccc !important; border-right:0px solid #ccc !important; '">
+                            <span t-field="rec_line.date_maturity"/>
+                        </td>
+                        <td class="text-center"
+                            t-att-style="'padding:5px 10px; border:0.5px solid #ccc !important; border-right:0px solid #ccc !important; '">
+                            <span t-out="rec_line.move_id.currency_id.round(amount)"/>
+                        </td>
+                        <td class="text-center"
+                            t-att-style="'padding:5px 10px; border:0.5px solid #ccc !important; border-right:0px solid #ccc !important; '">
+                            <span t-out="rec_line.move_id.currency_id.name"/>
+                        </td>
+                    </tr>
+                </t>
+            </tbody>
+        </table>
+    </template>
     <!-- <template id="report_invoice_payment_move_line">
         <t t-set="payments_vals" t-value="o._compute_payments_widget_reconciled_info()"/>
         <tr t-if="payments_vals">
@@ -685,7 +734,7 @@
     </template>
     <template id="report_invoice_barcode">
         <div class="row" t-if="o.company_id.is_show_barcode == True">
-            <div style="page-break-inside: avoid !important; position:absolute; width:100%; text-align:center;">
+            <div style="position:absolute; width:100%; text-align:center;">
                 <!-- <img style="width:190px; height:35px;" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', o.name, 600, 100)"/> -->
                 <span t-field="o.name" t-options="{'widget':'barcode','width':190,'height':35}"/>
             </div>
@@ -715,7 +764,7 @@
             </li>
         </ul>
         <div class="row" t-if="o.display_qr_code">
-            <div style="page-break-inside: avoid !important; position:absolute; width:100%; text-align:center;">
+            <div style="position:absolute; width:100%; text-align:center;">
                 <div id="qrcode" t-if="o.display_qr_code and o.amount_residual > 0">
                     <p t-if="qr_code_urls.get(o.id)">
                         <strong class="text-center">Scan me with your banking app.</strong><br/><br/>

@@ -140,10 +140,10 @@
                     <t t-call="general_template.template_watermark"/>
 
                     <div t-attf-style="color: #{o.company_id and o.company_id.text_color or '#000000'};">
-                        <div class="row"
-                             t-attf-style="color: #{o.company_id and o.company_id.text_color or '#000000'};justify-content: space-between;">
-                            <div class="col-6"
-                                 t-attf-style="border-radius: 10px;border: 2px solid #{o.company_id.theme_color or '#666'};padding: 8px;height:auto;margin:0.4%;">
+
+
+                        <div class="row" t-attf-style="color: #{o.company_id and o.company_id.text_color or '#000000'};justify-content: space-between;">
+                            <div class="col-6" t-attf-style="border-radius: 10px;border: 2px solid #{o.company_id.theme_color or '#666'};padding: 8px;height:auto; margin:0.4%">
                                 <b>SEÑOR(ES):</b>
                                 <p style="text-transform:uppercase;">
                                     <span t-field="o.partner_id.name"/><br/>
@@ -152,8 +152,7 @@
                                     <br/>
                                 </p>
                             </div>
-                            <div class="col-6"
-                                 t-attf-style="border-radius: 10px;border: 2px solid #{o.company_id.theme_color or '#666'};padding: 8px;height:auto;margin:0.4%;">
+                            <div class="col-6" t-attf-style="border-radius: 10px;border: 2px solid #{o.company_id.theme_color or '#666'};padding: 8px;height:auto; margin:0.4%">
                                 <b>DIRECCIÓN:</b>
                                 <p style="text-transform:uppercase;">
                                     <span>
@@ -172,11 +171,10 @@
                                         </t>
                                     </span>
                                 </p>
-
                             </div>
                         </div>
 
-                        <div class="row"
+                        <div class="row mt-2 mb-2"
                              t-attf-style="border-radius: 10px;border: 2px solid #{o.company_id.theme_color or '#666'};padding: 8px;height:auto;margin:0.4%;width:100%">
                             <div style="width:20%">
                                 <b>VENDEDOR(A):</b><br/>
@@ -197,7 +195,8 @@
                             <div style="width:20%">
                                 <b>N° GUÍA:</b><br/>
                                 <t t-foreach="o.picking_ids" t-as="picking">
-                                    <span t-out="picking.l10n_latam_document_number" t-if="picking.l10n_latam_document_number"/>
+                                    <span t-out="picking.l10n_latam_document_number"
+                                          t-if="picking.l10n_latam_document_number"/>
                                 </t>
                             </div>
                         </div>
@@ -209,6 +208,9 @@
                     </div>
                     <div>
                         <t t-call="general_template.invoice_subtotal_tem"/>
+                    </div>
+                    <div class="mt-4">
+                        <t t-call="general_template.report_cuotas_custom"/>
                     </div>
 
                     <div t-if="not o._compute_payments_widget_reconciled_info()">
