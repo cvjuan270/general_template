@@ -98,27 +98,7 @@
                         </tr>
                     </tbody>
                 </table>
-                <!--                <div class="row">-->
-                <!--                    <div class="col-9">-->
-                <!--                        <t t-if="o.company_id.invoice_logo or o.company_id.logo">-->
-                <!--                            <img t-att-src="image_data_uri(o.company_id.invoice_logo)" style="height: 100px;" t-if="o.company_id.logo"/>-->
-                <!--                        </t>-->
-                <!--                    </div>-->
-                <!--                    <div class="col-3">-->
-                <!--                        <t t-if="o.company_id.street">-->
-                <!--                            <span t-attf-style="color: #{o.company_id and o.company_id.company_address_color or '#000000'};" t-field="o.company_id.street"/><br/>-->
-                <!--                        </t>-->
-                <!--                        <t t-if="o.company_id.phone">-->
-                <!--                            <span t-attf-style="color: #{o.company_id and o.company_id.company_address_color or '#000000'};" t-field="o.company_id.phone"/><br/>-->
-                <!--                        </t>-->
-                <!--                        <t t-if="o.company_id.email">-->
-                <!--                            <span t-attf-style="color: #{o.company_id and o.company_id.company_address_color or '#000000'};" t-field="o.company_id.email"/><br/>-->
-                <!--                        </t>-->
-                <!--                        <t t-if="o.company_id.website">-->
-                <!--                            <span t-attf-style="color: #{o.company_id and o.company_id.company_address_color or '#000000'};" t-field="o.company_id.website"/>-->
-                <!--                        </t>-->
-                <!--                    </div>-->
-                <!--                </div>-->
+
                 <div>
                     <p t-attf-style="border-bottom:1px solid #{theme_color};width:100%;padding:10px;"/>
                 </div>
@@ -240,9 +220,6 @@
         </template>
         <template id="report_invoice_exclusive_main_duplicate"
                   inherit_id="general_template.report_invoice_exclusive_main" primary="True">
-            <!-- <xpath expr="//div[@t-if='not o._compute_payments_widget_reconciled_info()']" position="before">
-                <t t-call="general_template.report_invoice_payment_move_line"/>
-            </xpath> -->
         </template>
     </data>
 </odoo>
