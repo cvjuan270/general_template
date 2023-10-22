@@ -198,10 +198,14 @@
                              t-attf-style="border: solid; border-radius: 10px; padding: 0; border-width: 2px; border-color: #{o.company_id and o.company_id.theme_color or '#000000'};">
                             <div class="col-6 p-1"
                                  t-attf-style="padding: 0; border-right: solid; margin: 0; border-width: 2px; border-color: #{o.company_id and o.company_id.theme_color or '#000000'};">
-                                <center>N. DE FACTURA: </center>
+                                <center>N. DE FACTURA:
+                                    <t t-foreach="o.invoice_ids" t-as="inv" t-if="o.invoice_count">
+                                        <t t-esc="inv.name"/>
+                                    </t>
+                                </center>
                             </div>
                             <div class="col-6 p-1">
-                                <center>N. DE O/C: </center>
+                                <center>N. DE O/C: <t t-out="o.origin"/> </center>
                             </div>
                         </div>
                         <div t-attf-style="border: solid; border-radius: 10px; padding: 0; border-width: 2px; border-color: #{o.company_id and o.company_id.theme_color or '#000000'};">

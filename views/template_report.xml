@@ -76,7 +76,7 @@
         </record>
 
         <!-- Sale Order Template -->
-            
+
         <record id="report_sale_order_contemporary" model="ir.actions.report">
             <field name="name">Vintage</field>
             <field name="model">sale.order</field>
@@ -143,7 +143,7 @@
             <field name="binding_type">report</field>
             <field name="binding_view_types">None</field>
         </record>
-        
+
         <!-- Delivery Template -->
         <record id="report_delivery_contemporary" model="ir.actions.report">
             <field name="name">Morden</field>
@@ -290,7 +290,7 @@
             <field name="binding_type">report</field>
             <field name="binding_view_types">None</field>
         </record>
-        
+
        <!-- demo template -->
         <record id="report_demo_template" model="ir.actions.report">
             <field name="name">Preview Template</field>

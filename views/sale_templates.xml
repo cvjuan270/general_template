@@ -2,19 +2,19 @@
 <odoo>
     <template id="report_sale_signature">
         <div style="text-align:center;">
-            
-                <t t-if="o.signed_by">
-                    <b t-field="o.signed_by"/><br/><br/>
-                </t>
-            
-                <t t-if="o.signed_on">
-                    <b t-field="o.signed_on"/><br/><br/>
-                </t>
-            
-                <t t-if="o.signature">
-                    <img t-att-src="image_data_uri(o.signature)" style="max-height:50px;"/>
-                </t>
-           
+
+            <t t-if="o.signed_by">
+                <b t-field="o.signed_by"/><br/><br/>
+            </t>
+
+            <t t-if="o.signed_on">
+                <b t-field="o.signed_on"/><br/><br/>
+            </t>
+
+            <t t-if="o.signature">
+                <img t-att-src="image_data_uri(o.signature)" style="max-height:50px;"/>
+            </t>
+
         </div>
     </template>
     <template id="sale_templates_customer_details">
@@ -91,9 +91,9 @@
             </p>
         </t>
     </template>
-        <!-- </td><td align="left" style="padding:15px 0px 0px 15px; width:50%; line-height:18px;" valign="top">-->
+    <!-- </td><td align="left" style="padding:15px 0px 0px 15px; width:50%; line-height:18px;" valign="top">-->
     <template id="sale_templates_invoice_customer_shipping_details">
-        <t t-if="o.partner_shipping_id != o.partner_invoice_id" >
+        <t t-if="o.partner_shipping_id != o.partner_invoice_id">
             <div>
                 <p t-attf-style="text-transform:capitalize; color: #{theme_color or '#ffffff'}; font-weight:bold; margin:0; margin-bottom:5px;">
                     <strong>Shipping address:</strong>
@@ -129,76 +129,124 @@
                     </t>
                 </p>
             </div>
-            
+
         </t>
     </template>
-        <!-- </td>-->
+    <!-- </td>-->
     <template id="sale_order_lines_tem">
-        <table BORDERCOLOR="#{theme_color or '#000000'}" border="1" cellpadding="0" cellspacing="0" class="table table-bordered" style="border:0.5px solid #ccc;  border-collapse: collapse; text-transform:capitalize; padding:15px;" width="100%">
+        <table BORDERCOLOR="#{theme_color or '#000000'}" border="1" cellpadding="0" cellspacing="0"
+               class="table table-borderless"
+               style="border:0.5px solid #ccc;  border-collapse: collapse; text-transform:capitalize; padding:15px;"
+               width="100%">
             <thead>
                 <t t-set="display_discount" t-value="any([l.discount for l in o.order_line])"/>
+                <t t-set="has_brand" t-value="any([l.product_id.product_brand_id for l in o.order_line])"/>
                 <tr t-attf-style="page-break-inside: avoid !important;background-color: #{theme_color or '#000000'}; color: #{theme_text_color or '#000000'};">
                     <t t-set="colspan" t-value="5"/>
-                    <td align="center" t-attf-style="padding:5px 10px; border:1px solid #{theme_color or '#000000'} !important; border-right:0px solid #{theme_color or '#000000'} !important; font-weight:bold;" width="8%">Sr.</td>
+                    <td align="center"
+                        t-attf-style="padding:5px 10px; border:1px solid #{theme_color or '#000000'} !important; border-right:0px solid #{theme_color or '#000000'} !important; font-weight:bold;"
+                        width="8%">#</td>
                     <t t-if="o.company_id.add_product_image == True">
-                        <td align="left" t-attf-style="padding:5px 10px; border:1px solid #{theme_color or '#000000'} !important; border-right:0px solid #{theme_color or '#000000'} !important; font-weight:bold;" width="15%">
+                        <td align="left"
+                            t-attf-style="padding:5px 10px; border:1px solid #{theme_color or '#000000'} !important; border-right:0px solid #{theme_color or '#000000'} !important; font-weight:bold;"
+                            width="15%">
                             <span>Image</span>
                             <t t-set="colspan" t-value="colspan+1"/>
                         </td>
                     </t>
-                    <td align="left" t-attf-style="padding:5px 10px; border:1px solid #{theme_color or '#000000'} !important; border-right:0px solid #{theme_color or '#000000'} !important; font-weight:bold;" width="52%">Description</td>
-                    <td align="right" t-attf-style="padding:5px 10px;border:1px solid #{theme_color or '#000000'} !important; border-right:0px solid #{theme_color or '#000000'} !important; font-weight:bold;" width="14%">Quantity</td>
-                    <td align="right" t-attf-style="padding:5px 10px;border:1px solid #{theme_color or '#000000'} !important; border-right:0px solid #{theme_color or '#000000'} !important; font-weight:bold;" width="15%">Unit Price</td>
-                    <td align="center" groups="product.group_discount_per_so_line" t-attf-style="padding:5px 10px; border:1px solid #{theme_color or '#000000'} !important; border-right:0px solid #{theme_color or '#000000'} !important; font-weight:bold;" t-if="display_discount" width="12%"><t t-set="colspan" t-value="colspan+1"/>Disc.(%)</td>
-                    <td align="center" t-attf-style="padding:5px 10px; border:1px solid #{theme_color or '#000000'} !important; border-right:0px solid #{theme_color or '#000000'} !important; font-weight:bold;" width="12%">Taxes</td>
-                    <td align="right" t-attf-style="padding:5px 10px; border:1px solid #{theme_color or '#000000'} !important; border-right:0px solid #{theme_color or '#000000'} !important; font-weight:bold;" width="25%">Price</td>
+                    <td align="left"
+                        t-attf-style="padding:5px 10px; border:1px solid #{theme_color or '#000000'} !important; border-right:0px solid #{theme_color or '#000000'} !important; font-weight:bold;"
+                        width="52%">DESCRIPCION DEL PRODUCTO</td>
+
+                    <t t-if="has_brand">
+                        <td align="left"
+                            t-attf-style="padding:5px 10px; border:1px solid #{theme_color or '#000000'} !important; border-right:0px solid #{theme_color or '#000000'} !important; font-weight:bold;"
+                            width="10%">
+                            <span>MARCA</span>
+                        </td>
+                    </t>
+
+                    <td align="right"
+                        t-attf-style="padding:5px 10px;border:1px solid #{theme_color or '#000000'} !important; border-right:0px solid #{theme_color or '#000000'} !important; font-weight:bold;"
+                        width="14%">CANTIDAD</td>
+                    <td align="right"
+                        t-attf-style="padding:5px 10px;border:1px solid #{theme_color or '#000000'} !important; border-right:0px solid #{theme_color or '#000000'} !important; font-weight:bold;"
+                        width="15%">P.UNIT.</td>
+                    <td align="center" groups="product.group_discount_per_so_line"
+                        t-attf-style="padding:5px 10px; border:1px solid #{theme_color or '#000000'} !important; border-right:0px solid #{theme_color or '#000000'} !important; font-weight:bold;"
+                        t-if="display_discount" width="12%"><t t-set="colspan" t-value="colspan+1"/>Disc.(%)</td>
+                    <!--                    <td align="center" t-attf-style="padding:5px 10px; border:1px solid #{theme_color or '#000000'} !important; border-right:0px solid #{theme_color or '#000000'} !important; font-weight:bold;" width="12%">Taxes</td>-->
+                    <td align="right"
+                        t-attf-style="padding:5px 10px; border:1px solid #{theme_color or '#000000'} !important; border-right:0px solid #{theme_color or '#000000'} !important; font-weight:bold;"
+                        width="25%">Price
+                    </td>
                 </tr>
             </thead>
             <tbody class="sale_tbody">
                 <t t-set="index_no" t-value="1"/>
                 <t t-set="current_subtotal" t-value="0"/>
                 <t t-foreach="o.order_line" t-as="line">
-                    <t t-set="current_subtotal" t-value="current_subtotal + line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
-                    <t t-set="current_subtotal" t-value="current_subtotal + line.price_total" groups="account.group_show_line_subtotals_tax_included"/>
+                    <t t-set="current_subtotal" t-value="current_subtotal + line.price_subtotal"
+                       groups="account.group_show_line_subtotals_tax_excluded"/>
+                    <t t-set="current_subtotal" t-value="current_subtotal + line.price_total"
+                       groups="account.group_show_line_subtotals_tax_included"/>
                     <t t-if="line_odd">
                         <t t-set="ol_color" t-value="o.company_id.even_party_color"/>
                     </t>
                     <t t-if="line_even">
                         <t t-set="ol_color" t-value="o.company_id.odd_party_color"/>
                     </t>
-                    <tr t-att-style="'page-break-inside: avoid !important; color: %s; background-color: %s '%(text_color, ol_color)  ">
+                    <tr t-att-style="">
                         <t t-if="not line.display_type">
-                            <td class="text-center" t-att-style="'padding:5px 10px; border:0.5px solid #ccc !important; border-right:0px solid #ccc !important;'">
+                            <td class="text-center"
+                                t-att-style="'padding:5px 10px; border:0.5px solid #ccc !important; border-right:0px solid #ccc !important;'">
                                 <span t-esc="index_no"/>
                             </td>
                             <t t-if="o.company_id.add_product_image == True">
-                                <td class="text-right" t-att-style="'padding:5px 10px; border:0.5px solid #ccc !important; border-right:0px solid #ccc !important; '">
-                                    <span style="width: 64px;height: 64px;margin: auto;display: -webkit-box;display: -ms-flexbox;display: flex;-webkit-box-pack: center;-ms-flex-pack: center;justify-content: center;-webkit-box-align: center;-ms-flex-align: center;align-items: center;" t-field="line.product_id.image_256" t-options="{&quot;widget&quot;:&quot;image&quot;,&quot;class&quot;:&quot;img-rounded mh-100&quot;}"/>
+                                <td class="text-right"
+                                    t-att-style="'padding:5px 10px; border:0.5px solid #ccc !important; border-right:0px solid #ccc !important; '">
+                                    <span style="width: 64px;height: 64px;margin: auto;display: -webkit-box;display: -ms-flexbox;display: flex;-webkit-box-pack: center;-ms-flex-pack: center;justify-content: center;-webkit-box-align: center;-ms-flex-align: center;align-items: center;"
+                                          t-field="line.product_id.image_256"
+                                          t-options="{&quot;widget&quot;:&quot;image&quot;,&quot;class&quot;:&quot;img-rounded mh-100&quot;}"/>
                                 </td>
                             </t>
-                            <td class="text-left" t-att-style="'padding:5px 10px; border:0.5px solid #ccc !important; border-right:0px solid #ccc !important;'">
+                            <td class="text-left"
+                                t-att-style="'padding:5px 10px; border:0.5px solid #ccc !important; border-right:0px solid #ccc !important;'">
                                 <span t-field="line.name"/>
                             </td>
-                            <td class="text-right" t-att-style="'padding:5px 10px; border:0.5px solid #ccc !important; border-right:0px solid #ccc !important;'">
+                             <td  t-if="has_brand" class="text-left"
+                                t-att-style="'padding:5px 10px; border:0.5px solid #ccc !important; border-right:0px solid #ccc !important;'">
+                                <span t-field="line.product_id.product_brand_id"/>
+                            </td>
+                            <td class="text-right" align="right"
+                                t-att-style="'padding:5px 10px; border:0.5px solid #ccc !important; border-right:0px solid #ccc !important;'">
                                 <span t-field="line.product_uom_qty"/>
                                 <span t-field="line.product_uom" groups="uom.group_uom"/>
                             </td>
-                            <td class="text-right" t-att-style="'padding:5px 10px; border:0.5px solid #ccc !important; border-right:0px solid #ccc !important;'">
+                            <td class="text-right" align="right"
+                                t-att-style="'padding:5px 10px; border:0.5px solid #ccc !important; border-right:0px solid #ccc !important;'">
                                 <span t-field="line.price_unit"/>
                             </td>
-                            <td class="text-right" groups="product.group_discount_per_so_line" t-att-style="'padding:5px 10px; border:0.5px solid #ccc !important; border-right:0px solid #ccc !important;'" t-if="display_discount">
+                            <td class="text-right" groups="product.group_discount_per_so_line"
+                                t-att-style="'padding:5px 10px; border:0.5px solid #ccc !important; border-right:0px solid #ccc !important;'"
+                                t-if="display_discount">
                                 <span t-field="line.discount"/>
                             </td>
-                            <td class="text-right" t-att-style="'padding:5px 10px; border:0.5px solid #ccc !important; border-right:0px solid #ccc !important;'">
-                                <span t-esc="', '.join(map(lambda x: (x.description or x.name), line.tax_id))"/>
-                            </td>
-                            <td class="text-right" t-att-style="'padding:5px 10px; border:0.5px solid #ccc !important; border-right:0px solid #ccc !important;'">
-                                <span t-field="line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
-                                <span t-field="line.price_total" groups="account.group_show_line_subtotals_tax_included"/>
+<!--                            <td class="text-right"-->
+<!--                                t-att-style="'padding:5px 10px; border:0.5px solid #ccc !important; border-right:0px solid #ccc !important;'">-->
+<!--                                <span t-esc="', '.join(map(lambda x: (x.description or x.name), line.tax_id))"/>-->
+<!--                            </td>-->
+                            <td class="text-right" align="right"
+                                t-att-style="'padding:5px 10px; border:0.5px solid #ccc !important; border-right:0px solid #ccc !important;'">
+                                <span t-field="line.price_subtotal"
+                                      groups="account.group_show_line_subtotals_tax_excluded"/>
+                                <span t-field="line.price_total"
+                                      groups="account.group_show_line_subtotals_tax_included"/>
                             </td>
                         </t>
                         <t t-if="line.display_type == 'line_section'">
-                            <td class="text-center" t-att-style="'padding:5px 10px; border:0.5px solid #ccc !important; border-right:0px solid #ccc !important;'">
+                            <td class="text-center"
+                                t-att-style="'padding:5px 10px; border:0.5px solid #ccc !important; border-right:0px solid #ccc !important;'">
                                 <span t-esc="index_no"/>
                             </td>
                             <td t-att-colspan="colspan">
@@ -208,7 +256,8 @@
                             <t t-set="current_subtotal" t-value="0"/>
                         </t>
                         <t t-if="line.display_type == 'line_note'">
-                            <td class="text-center" t-att-style="'padding:5px 10px; border:0.5px solid #ccc !important; border-right:0px solid #ccc !important;'">
+                            <td class="text-center"
+                                t-att-style="'padding:5px 10px; border:0.5px solid #ccc !important; border-right:0px solid #ccc !important;'">
                                 <span t-esc="index_no"/>
                             </td>
                             <td t-att-colspan="colspan">
@@ -218,16 +267,18 @@
                     </tr>
 
                     <t t-if="current_section and (line_last or o.order_line[line_index+1].display_type == 'line_section')">
-                        <tr class="is-subtotal text-right" t-att-style="'background-color: %s; color: %s; '%(ol_color, text_color)">
-                            <td class="text-center" t-att-style="'padding:5px 10px; border:0.5px solid #ccc !important; border-right:0px solid #ccc !important;'">
+                        <tr class="is-subtotal text-right"
+                            t-att-style="'background-color: %s; color: %s; '%(ol_color, text_color)">
+                            <td class="text-center"
+                                t-att-style="'padding:5px 10px; border:0.5px solid #ccc !important; border-right:0px solid #ccc !important;'">
                                 <t t-set="index_no" t-value="index_no+1"/>
                                 <span t-esc="index_no"/>
                             </td>
                             <td t-att-colspan="colspan">
                                 <strong class="mr16">Subtotal</strong>
                                 <span
-                                    t-esc="current_subtotal"
-                                    t-options='{"widget": "monetary", "display_currency": o.pricelist_id.currency_id}'
+                                        t-esc="current_subtotal"
+                                        t-options='{"widget": "monetary", "display_currency": o.pricelist_id.currency_id}'
                                 />
                             </td>
                         </tr>
@@ -240,7 +291,8 @@
 
     <template id="sale_order_lines_subtotal_tem">
         <div class="clearfix">
-            <div class="row" name="total" t-att-style="'background-color: %s;float:right; color: %s; '%(ol_color, text_color)">
+            <div class="row" name="total"
+                 t-att-style="'background-color: %s;float:right; color: %s; '%(ol_color, text_color)">
                 <div t-attf-class="#{'col-4' if report_type != 'html' else 'col-7 col-5'} ml-auto">
                     <table class="table table-borderless">
                         <tr class="border-black" style="border-bottom:1px solid #dddddd;">
@@ -274,33 +326,36 @@
                             </tr>
                         </t-->
                         <t t-set="tax_totals" t-value="o.tax_totals"/>
-                    <t t-foreach="tax_totals['subtotals']" t-as="subtotal">
-                        <t t-set="subtotal_to_show" t-value="subtotal['name']"/>
-                        <t t-foreach="tax_totals['groups_by_subtotal'][subtotal_to_show]" t-as="amount_by_group">
-                            <tr>
-                                <t t-if="len(tax_totals['groups_by_subtotal'][subtotal_to_show]) > 1">
-                                    <td class="left">
-                                        <span t-esc="amount_by_group['tax_group_name']"/>
-                                        <span class="text-right"> on
-                                            <t t-esc="amount_by_group['formatted_tax_group_base_amount']"/>
-                                        </span>
-                                    </td>
-                                    <td >
-                                        <span class="text-nowrap" t-esc="amount_by_group['formatted_tax_group_amount']"/>
-                                    </td>
-                                </t>
-                                <t t-else="">
-                                    <td class="left"><span class="text-right" t-esc="amount_by_group['tax_group_name']"/></td>
-                                    <td class="text-right o_price_total">
-                                        <span class="text-right" t-esc="amount_by_group['formatted_tax_group_amount']" />
-                                    </td>
-                                </t>
-                            </tr>
+                        <t t-foreach="tax_totals['subtotals']" t-as="subtotal">
+                            <t t-set="subtotal_to_show" t-value="subtotal['name']"/>
+                            <t t-foreach="tax_totals['groups_by_subtotal'][subtotal_to_show]" t-as="amount_by_group">
+                                <tr>
+                                    <t t-if="len(tax_totals['groups_by_subtotal'][subtotal_to_show]) > 1">
+                                        <td class="left">
+                                            <span t-esc="amount_by_group['tax_group_name']"/>
+                                            <span class="text-right"> on
+                                                <t t-esc="amount_by_group['formatted_tax_group_base_amount']"/>
+                                            </span>
+                                        </td>
+                                        <td align="right">
+                                            <span class="text-nowrap"
+                                                  t-esc="amount_by_group['formatted_tax_group_amount']"/>
+                                        </td>
+                                    </t>
+                                    <t t-else="">
+                                        <td align="right" class="left"><span class="text-right"
+                                                               t-esc="amount_by_group['tax_group_name']"/></td>
+                                        <td align="right" class="text-right o_price_total">
+                                            <span class="text-right"
+                                                  t-esc="amount_by_group['formatted_tax_group_amount']"/>
+                                        </td>
+                                    </t>
+                                </tr>
+                            </t>
                         </t>
-                    </t>                       
                         <tr class="border-black">
                             <td><strong>Total</strong></td>
-                            <td class="text-right">
+                            <td align="right" class="text-right">
                                 <span t-field="o.amount_total"/>
                             </td>
                         </tr>
@@ -336,17 +391,31 @@
         <h2 t-attf-style="font-weight:bold; color: #{text_color or '#000000'};">
             <span>Suggested Products</span>
         </h2>
-        <table cellpadding="0" cellspacing="0" class="table" style="border:0.5px solid #ccc;  border-collapse: collapse; padding:15px; border-bottom:1px solid #ccc;" width="100%">
+        <table cellpadding="0" cellspacing="0" class="table"
+               style="border:0.5px solid #ccc;  border-collapse: collapse; padding:15px; border-bottom:1px solid #ccc;"
+               width="100%">
             <thead>
                 <tr t-attf-style="page-break-inside: avoid !important;background-color: #{theme_color or '#000000'}; color: #{theme_text_color or '#000000'};">
-                    <td align="center" t-attf-style="padding:5px 10px; border:1px solid #{theme_color or '#000000'} !important; border-right:0px solid #{theme_color or '#000000'} !important; font-weight:bold;" width="8%">Sr.</td>
+                    <td align="center"
+                        t-attf-style="padding:5px 10px; border:1px solid #{theme_color or '#000000'} !important; border-right:0px solid #{theme_color or '#000000'} !important; font-weight:bold;"
+                        width="8%">Sr.</td>
                     <t t-if="o.company_id.add_product_image == True">
-                        <td align="left" t-attf-style="padding:5px 10px; border:1px solid #{theme_color or '#000000'} !important; border-right:0px solid #{theme_color or '#000000'} !important; font-weight:bold;" width="15%">Image</td>
+                        <td align="left"
+                            t-attf-style="padding:5px 10px; border:1px solid #{theme_color or '#000000'} !important; border-right:0px solid #{theme_color or '#000000'} !important; font-weight:bold;"
+                            width="15%">Image</td>
                     </t>
-                    <td align="left" t-attf-style="padding:5px 10px; border:1px solid #{theme_color or '#000000'} !important; border-right:0px solid #{theme_color or '#000000'} !important; font-weight:bold;" width="15%">Product</td>
-                    <td align="left" t-attf-style="padding:5px 10px; border:1px solid #{theme_color or '#000000'} !important; border-right:0px solid #{theme_color or '#000000'} !important; font-weight:bold;" width="52%">Description</td>
-                    <td align="center" groups="sale.group_discount_per_so_line" t-attf-style="padding:5px 10px; border:1px solid #{theme_color or '#000000'} !important; border-right:0px solid #{theme_color or '#000000'} !important; font-weight:bold;" width="12%"/>
-                    <td align="right" t-attf-style="padding:5px 10px; border:1px solid #{theme_color or '#000000'} !important; border-right:0px solid #{theme_color or '#000000'} !important; font-weight:bold;" width="14%">Unit Price</td>
+                    <td align="left"
+                        t-attf-style="padding:5px 10px; border:1px solid #{theme_color or '#000000'} !important; border-right:0px solid #{theme_color or '#000000'} !important; font-weight:bold;"
+                        width="15%">Product</td>
+                    <td align="left"
+                        t-attf-style="padding:5px 10px; border:1px solid #{theme_color or '#000000'} !important; border-right:0px solid #{theme_color or '#000000'} !important; font-weight:bold;"
+                        width="52%">Description</td>
+                    <td align="center" groups="sale.group_discount_per_so_line"
+                        t-attf-style="padding:5px 10px; border:1px solid #{theme_color or '#000000'} !important; border-right:0px solid #{theme_color or '#000000'} !important; font-weight:bold;"
+                        width="12%"/>
+                    <td align="right"
+                        t-attf-style="padding:5px 10px; border:1px solid #{theme_color or '#000000'} !important; border-right:0px solid #{theme_color or '#000000'} !important; font-weight:bold;"
+                        width="14%">Unit Price</td>
                 </tr>
             </thead>
             <tbody>
@@ -358,18 +427,23 @@
                         <t t-set="option_color" t-value="o.company_id.odd_party_color"/>
                     </t>
                     <tr t-att-style="'page-break-inside: avoid !important;background-color: ' + option_color+ '; color:' + text_color ">
-                        <td align="left" class="text-center" t-att-style="'padding:5px 10px; border:0.5px solid #ccc !important; border-right:0px solid #ccc !important; '">
+                        <td align="left" class="text-center"
+                            t-att-style="'padding:5px 10px; border:0.5px solid #ccc !important; border-right:0px solid #ccc !important; '">
                             <span t-esc="option_index+1"/>
                         </td>
                         <t t-if="o.company_id.add_product_image == True">
-                            <td class="text-right" t-att-style="'padding:5px 10px; border:0.5px solid #ccc !important; border-right:0px solid #ccc !important; '">
-                                <span t-field="option.product_id.image_256" t-options="{&quot;widget&quot;:&quot;image&quot;,&quot;class&quot;:&quot;img-rounded&quot;}"/>
+                            <td class="text-right"
+                                t-att-style="'padding:5px 10px; border:0.5px solid #ccc !important; border-right:0px solid #ccc !important; '">
+                                <span t-field="option.product_id.image_256"
+                                      t-options="{&quot;widget&quot;:&quot;image&quot;,&quot;class&quot;:&quot;img-rounded&quot;}"/>
                             </td>
                         </t>
-                        <td align="left" class="text-left" t-att-style="'padding:5px 10px; border:0.5px solid #ccc !important; border-right:0px solid #ccc !important; '">
+                        <td align="left" class="text-left"
+                            t-att-style="'padding:5px 10px; border:0.5px solid #ccc !important; border-right:0px solid #ccc !important; '">
                             <span t-field="option.product_id.name"/>
                         </td>
-                        <td align="left" class="text-left" t-att-style="'padding:5px 10px; border:0.5px solid #ccc !important; border-right:0px solid #ccc !important; '">
+                        <td align="left" class="text-left"
+                            t-att-style="'padding:5px 10px; border:0.5px solid #ccc !important; border-right:0px solid #ccc !important; '">
                             <t t-if="not o.company_id.is_description">
                                 <span t-field="option.name"/>
                             </t>
@@ -379,10 +453,15 @@
                         </td>
                         <td groups="sale.group_discount_per_so_line">
                             <strong class="text-info">
-                                <t t-esc="((option.discount % 1) and '%s' or '%d') % option.discount"/>% discount</strong>
+                                <t t-esc="((option.discount % 1) and '%s' or '%d') % option.discount"/>%
+                                discount</strong>
                         </td>
-                        <td align="center" class="text-right" t-att-style="'padding:5px 10px; border:0.5px solid #ccc !important; border-right:0px solid #ccc !important; '">
-                            <div t-att-class="option.discount and 'text-danger' or ''" t-att-style="option.discount and 'text-decoration: line-through' or ''" t-field="option.price_unit" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.pricelist_id.currency_id}"/>
+                        <td align="center" class="text-right"
+                            t-att-style="'padding:5px 10px; border:0.5px solid #ccc !important; border-right:0px solid #ccc !important; '">
+                            <div t-att-class="option.discount and 'text-danger' or ''"
+                                 t-att-style="option.discount and 'text-decoration: line-through' or ''"
+                                 t-field="option.price_unit"
+                                 t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.pricelist_id.currency_id}"/>
                             <div t-if="option.discount">
                                 <t t-esc="'%.2f' % ((1-option.discount / 100.0) * option.price_unit)"/>
                             </div>
