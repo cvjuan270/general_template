@@ -337,13 +337,13 @@
                                                 <t t-esc="amount_by_group['formatted_tax_group_base_amount']"/>
                                             </span>
                                         </td>
-                                        <td align="right">
+                                        <td>
                                             <span class="text-nowrap"
                                                   t-esc="amount_by_group['formatted_tax_group_amount']"/>
                                         </td>
                                     </t>
                                     <t t-else="">
-                                        <td align="right" class="left"><span class="text-right"
+                                        <td align="left" class="left"><span class="text-right"
                                                                t-esc="amount_by_group['tax_group_name']"/></td>
                                         <td align="right" class="text-right o_price_total">
                                             <span class="text-right"

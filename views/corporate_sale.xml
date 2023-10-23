@@ -65,8 +65,7 @@
                 </div>
             </div>
             <div>
-                <br/>
-                <p t-attf-style="border-bottom:1px solid #{theme_color};width:100%;padding:10px;"/>
+                <p t-attf-style="border-bottom:1px solid #{company_address_color};width:100%;"/>
             </div>
         </div>
     </template>
@@ -87,7 +86,7 @@
                 <div width="100%">
                     <div>
                         <p class="table table-borderless"
-                           t-attf-style="color: #{o.company_id and o.company_id.theme_color or '#000000'};font-weight:bold;width:100%;font-size:24px;">
+                           t-attf-style="color: #{o.company_id and o.company_id.theme_color or '#000000'};font-weight:bold;width:100%;font-size:24px; text-align:center'">
                             <t t-if="not (env.context.get('proforma', False) or is_pro_forma)">
                                 <span t-if="o.state not in ['draft','sent']">Orden de Venta </span>
                                 <span t-if="o.state in ['draft','sent']">Cotización </span>
