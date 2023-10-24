@@ -33,7 +33,7 @@
                                             <table border="0" cellpadding="0" cellspacing="0" width="100%">
                                                 <tr>
                                                     <td align="left"
-                                                        style="color:#4D4D4F; padding: 0px 15px; border-right: 1px solid #188DC7;"
+                                                        t-attf-style="color:#4D4D4F; padding: 0px 15px; border-right: 1px solid #{o.company_id and o.company_id.theme_color or '#000000'};"
                                                         valign="middle">
                                                         <img t-att-src="image_data_uri(o.company_id.invoice_logo)"
                                                              style="height: 100px;" t-if="o.company_id.logo"/>
@@ -70,15 +70,15 @@
                                                             <span>RUC:
                                                                 <span t-esc="o.company_id.vat"/>
                                                             </span> <br/>
-                                                            <t t-if="o.l10n_pe_stock_status =='send'">
+                                                            <t t-if="o.l10n_pe_edi_status =='sent'">
                                                                 <span>GUÍA DE REMISIÓN ELECTRÓNICA</span>
                                                             </t>
                                                             <t t-else="">
                                                                 <span>NOTA DE ENTREGA</span>
                                                             </t>
                                                             <br/>
-                                                            <t t-if="o.l10n_pe_stock_status == 'send'">
-                                                                <span t-field="o.l10n_pe_stock_document_number"/>
+                                                            <t t-if="o.l10n_pe_edi_status == 'sent'">
+                                                                <span t-field="o.l10n_latam_document_number"/>
                                                             </t>
                                                             <t t-else="">
                                                                 <span t-field="o.name"/>
@@ -229,7 +229,7 @@
                              t-attf-style="border-bottom: solid; padding: 0; font-size: 12px; font-weight: bold; border-width: 2px; border-color: #{o.company_id and o.company_id.theme_color or '#000000'};">
                             NOMBRE O RAZON SOCIAL DE DESTINATARIO
                         </div>
-                        <div style="height: 56px; border-bottom: solid; border-width: 2px; border-color: #188dc7;">
+                        <div t-attf-style="height: 56px; border-bottom: solid; border-width: 2px; border-color: #{o.company_id and o.company_id.theme_color or '#000000'};">
                             <center style="font-size: 11px; margin: 5px 5px 5px 5px;">
                                 <t t-esc="o.partner_id.name.upper()"/>
                             </center>
@@ -250,7 +250,7 @@
                             <strong>MOTIVO TRASLADO:</strong>
                         </div>
                         <div class="col-10" style="padding: 0.2rem;"><span
-                                t-field="o.l10n_pe_stock_reason_for_transfer"/></div>
+                                t-field="o.l10n_pe_edi_reason_for_transfer"/></div>
                     </div>
                 </div>
                 <!-- fin custom -->
