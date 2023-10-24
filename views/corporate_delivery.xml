@@ -70,15 +70,15 @@
                                                             <span>RUC:
                                                                 <span t-esc="o.company_id.vat"/>
                                                             </span> <br/>
-                                                            <t t-if="o.l10n_pe_gre_status =='send'">
+                                                            <t t-if="o.l10n_pe_stock_status =='send'">
                                                                 <span>GUÍA DE REMISIÓN ELECTRÓNICA</span>
                                                             </t>
                                                             <t t-else="">
                                                                 <span>NOTA DE ENTREGA</span>
                                                             </t>
                                                             <br/>
-                                                            <t t-if="o.l10n_pe_gre_status == 'send'">
-                                                                <span t-field="o.l10n_pe_gre_document_number"/>
+                                                            <t t-if="o.l10n_pe_stock_status == 'send'">
+                                                                <span t-field="o.l10n_pe_stock_document_number"/>
                                                             </t>
                                                             <t t-else="">
                                                                 <span t-field="o.name"/>
@@ -215,11 +215,11 @@
                             </div>
                             <div style="margin:0.5rem;">
                                 <strong>MARCA Y NUMERO DE PLACA: </strong><span
-                                    t-field="o.l10n_pe_gre_vehicle_id"/><br/>
+                                    t-field="o.l10n_pe_stock_vehicle_id"/><br/>
                                 <strong>NOMBRE TRANSPORTISTA: </strong><span
-                                    t-field="o.l10n_pe_gre_operator_id"/><br/>
+                                    t-field="o.l10n_pe_stock_operator_id"/><br/>
                                 <strong>DOC. TRANSPORTISTA: </strong><span
-                                    t-field="o.l10n_pe_gre_operator_id.l10n_pe_gre_operator_license"/>
+                                    t-field="o.l10n_pe_stock_operator_id.l10n_pe_stock_operator_license"/>
                             </div>
                         </div>
                     </div>
@@ -250,7 +250,7 @@
                             <strong>MOTIVO TRASLADO:</strong>
                         </div>
                         <div class="col-10" style="padding: 0.2rem;"><span
-                                t-field="o.l10n_pe_gre_reason_for_transfer"/></div>
+                                t-field="o.l10n_pe_stock_reason_for_transfer"/></div>
                     </div>
                 </div>
                 <!-- fin custom -->
