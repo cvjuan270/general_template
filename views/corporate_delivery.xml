@@ -215,11 +215,11 @@
                             </div>
                             <div style="margin:0.5rem;">
                                 <strong>MARCA Y NUMERO DE PLACA: </strong><span
-                                    t-field="o.l10n_pe_stock_vehicle_id"/><br/>
+                                    t-field="o.l10n_pe_edi_vehicle_id"/><br/>
                                 <strong>NOMBRE TRANSPORTISTA: </strong><span
-                                    t-field="o.l10n_pe_stock_operator_id"/><br/>
+                                    t-field="o.l10n_pe_edi_operator_id"/><br/>
                                 <strong>DOC. TRANSPORTISTA: </strong><span
-                                    t-field="o.l10n_pe_stock_operator_id.l10n_pe_stock_operator_license"/>
+                                    t-field="o.l10n_pe_edi_operator_id.l10n_pe_edi_licencia"/>
                             </div>
                         </div>
                     </div>
