@@ -2,7 +2,7 @@
 # Part of AppJetty. See LICENSE file for full copyright and licensing details.
 
 {
-    'name': 'Plantillas de informes inteligentes todo en uno',
+    'name': '(edi) Plantillas de informes inteligentes todo en uno',
     'author': '',
     'license': 'OPL-1',
     'version': '16.0.1.0.3',

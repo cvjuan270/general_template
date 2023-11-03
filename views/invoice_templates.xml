@@ -2,8 +2,8 @@
 <odoo>
     <template id="invoice_templates_customer_details">
         <p t-attf-style="text-transform:capitalize; color: #{theme_color or '#ffffff'}; font-weight:bold; margin:0; margin-bottom:5px; padding:10px 0px 0px 0px;">
-            <strong t-if="o.partner_shipping_id == o.partner_id">Invoicing and shipping address:</strong>
-            <strong t-if="o.partner_shipping_id != o.partner_id">Invoicing address:</strong>
+            <strong t-if="o.partner_shipping_id == o.partner_id">Usuario/ Cliente:</strong>
+            <strong t-if="o.partner_shipping_id != o.partner_id">Dirección:</strong>
         </p>
         <t t-if="o.partner_id">
             <span t-attf-style="text-transform:capitalize; padding:0px; margin:0; color: #{customer_color or '#ffffff'};">
@@ -32,7 +32,7 @@
                     <br/>
                 </t>
                 <t t-if="o.partner_id.vat">
-                    <strong>Vat: </strong>
+                    <strong>RUC: </strong>
                     <span t-field="o.partner_id.vat"/>
                 </t>
             </p>
@@ -87,6 +87,11 @@
                 </t>
                 <t t-if="not o.company_id.is_company_bold">
                     <span t-field="o.company_id.partner_id"/>
+                </t>
+                <t t-if="o.company_id.partner_id and o.company_id.partner_id.vat">
+                <br/>
+                    <strong>RUC: </strong>
+                    <span t-field="o.company_id.partner_id.vat"/>
                 </t>
             </span>
         </div>
