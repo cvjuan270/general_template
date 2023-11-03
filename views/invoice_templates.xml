@@ -514,10 +514,6 @@
                 <b>Payment Terms Description: </b>
                 <span t-field="o.invoice_payment_term_id.note"/>
             </li>
-            <li t-if="o.narration">
-                <b>Comment: </b>
-                <span t-field="o.narration"/>
-            </li>
 
         </ul>
         <div class="row" t-if="o.display_qr_code">
