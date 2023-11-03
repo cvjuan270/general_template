@@ -20,13 +20,13 @@
              t-att-style="'font-family:'+o.company_id.font_id.family+';font-size:'+str(o.company_id.font_size)+'px;' ">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-4">
+                    <div class="col-6">
                         <t t-if="o.company_id.invoice_logo">
                             <img t-att-src="image_data_uri(o.company_id.invoice_logo)" style="height: 100px;"
                                  t-if="o.company_id.logo"/>
                         </t>
                     </div>
-                    <div class="col-4">
+                    <div class="col-3">
                         <t t-if="o.company_id.name">
                             <t t-call="general_template.templates_company_details"/>
                             <t t-if="o.company_id.company_details">
@@ -35,8 +35,7 @@
                             </t>
                         </t>
                     </div>
-
-                    <div class="col-4" align="right">
+                    <div class="col-3" align="right">
                         <p t-attf-style="font-size:24px;color: #{o.company_id and o.company_id.theme_color or '#000000'};">
                             <span>RUC:
                                 <span t-esc="o.company_id.vat"/>
