@@ -160,11 +160,11 @@
                             </div>
                             <div style="width:20%">
                                 <b>FECHA EMISIÓN:</b><br/>
-                                <span t-out="o._get_invoice_date()"/>
+                                <span t-field="o.invoice_date"/>
                             </div>
                             <div style="width:20%">
                                 <b>FECHA VCTO.:</b><br/>
-                                <span t-out="o._get_invoice_due_date()"/>
+                                <span t-field="o.invoice_date_due"/>
                             </div>
                             <div style="width:20%">
                                 <b>COND. DE PAGO:</b><br/>
