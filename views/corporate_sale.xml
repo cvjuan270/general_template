@@ -54,6 +54,12 @@
                         <span t-attf-style="color: #{o.company_id and o.company_id.company_address_color or '#000000'};"
                               t-field="o.company_id.website"/>
                     </t>
+
+<t t-if="o.company_id.company_details">
+                                                                <span t-attf-style="color: #{o.company_id and o.company_id.company_address_color or '#000000'};"
+                                                                      t-field="o.company_id.company_details"/>
+                                                            </t>
+
                 </div>
                 <div class="col-4">
                     <div style="position:absolute; top:0; right:0;">
@@ -100,8 +106,11 @@
                     <div t-att-class="temp_var"
                          style="border-radius: 10px;border: 2px solid #666;padding: 10px;height: auto;margin-bottom:0.5rem;">
                         <strong t-attf-style="color: #{o.company_id and o.company_id.company_address_color or '#000000'};font-weight:bold;width:100%;">
-                            SEÑORES: <t t-out="o.partner_id.name"/>
-                        </strong><br/>
+				SEÑORES: <t t-out="o.partner_id.name"/>
+				<t t-if="o.partner_id.vat">
+					RUC: <t t-out="o.partner_id.vat"/>
+				</t>
+		    </strong><br/>
                         <span>Por medio de la presente lo saludamos cordialmente y a la vez hacemos llegar la cotización
                             de acuerdo a lo solicitado:</span>
                     </div>

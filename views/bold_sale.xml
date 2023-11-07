@@ -9,29 +9,63 @@
             <t t-set="company" t-value="res_company"/>
         </t>
         <t t-call="general_template.sale_elegant_header"/>
-        <div class="article o_report_layout_standard" t-att-data-oe-id="o and o.id" t-att-data-oe-model="o and o._name" t-att-data-oe-lang="o and o.env.context.get('lang')">
+        <div class="article o_report_layout_standard" t-att-data-oe-id="o and o.id" t-att-data-oe-model="o and o._name"
+             t-att-data-oe-lang="o and o.env.context.get('lang')">
             <t t-out="0"/>
         </div>
         <t t-call="general_template.template_footer"/>
     </template>
     <template id="sale_elegant_header">
-        <div class="header" t-att-style="'font-family:'+o.company_id.font_id.family+';font-size:'+str(o.company_id.font_size)+'px;' ">
+        <div class="header"
+             t-att-style="'font-family:'+o.company_id.font_id.family+';font-size:'+str(o.company_id.font_size)+'px;' ">
             <div class="container">
                 <div class="row">
-                    <div class="col-8">
+                    <div class="col-6">
                         <t t-if="o.company_id.invoice_logo">
-                            <img t-att-src="image_data_uri(o.company_id.invoice_logo)" style="height: 100px;" t-if="o.company_id.logo"/>
+                            <img t-att-src="image_data_uri(o.company_id.invoice_logo)" style="height: 100px;"
+                                 t-if="o.company_id.logo"/>
                         </t>
                     </div>
-                    <div class="col-4">  
-                        <p t-attf-style="font-size:35px;color: #{o.company_id and o.company_id.theme_color or '#000000'};">
+                    <div class="col-4">
+                        <div style="padding:4px 0 4px 4px; width:96%; line-height:16px"
+                             valign="top">
+                            <strong t-attf-style="color: #{o.company_id and o.company_id.company_address_color or '#000000'};"
+                                    t-field="o.company_id.name"/><br/>
+                            <t t-if="o.company_id.vat">
+                                <strong t-attf-style="color: #{o.company_id and o.company_id.company_address_color or '#000000'};">
+                                    RUC: <t t-out="o.company_id.vat"/></strong><br/>
+                            </t>
+                            <t t-if="o.company_id.street">
+                                <span t-attf-style="color: #{o.company_id and o.company_id.company_address_color or '#000000'};"
+                                      t-field="o.company_id.street"/><br/>
+                            </t>
+                            <t t-if="o.company_id.phone">
+                                <span t-attf-style="color: #{o.company_id and o.company_id.company_address_color or '#000000'};"
+                                      t-field="o.company_id.phone"/><br/>
+                            </t>
+                            <t t-if="o.company_id.email">
+                                <span t-attf-style="color: #{o.company_id and o.company_id.company_address_color or '#000000'};"
+                                      t-field="o.company_id.email"/><br/>
+                            </t>
+                            <t t-if="o.company_id.website">
+                                <span t-attf-style="color: #{o.company_id and o.company_id.company_address_color or '#000000'};"
+                                      t-field="o.company_id.website"/>
+                            </t>
+                            <t t-if="o.company_id.company_details">
+                                <span t-attf-style="color: #{o.company_id and o.company_id.company_address_color or '#000000'};"
+                                      t-field="o.company_id.company_details"/>
+                            </t>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <p t-attf-style="font-size:14px;color: #{o.company_id and o.company_id.theme_color or '#000000'};">
                             <t t-if="not (env.context.get('proforma', False) or is_pro_forma)">
-                                <span t-if="o.state not in ['draft','sent']">Order # </span>
-                                <span t-if="o.state in ['draft','sent']">Quotation # </span>
+                                <span t-if="o.state not in ['draft','sent']">Orden de Venta # </span>
+                                <span t-if="o.state in ['draft','sent']">Cotización # </span>
                             </t>
                             <t t-if="env.context.get('proforma', False) or is_pro_forma">
                                 <span>Pro-Forma Invoice # </span>
-                            </t> 
+                            </t>
                             <span t-field="o.name"/>
                         </p>
                     </div>
@@ -52,27 +86,22 @@
             <t t-set="customer_color" t-value="o.company_id and o.company_id.customer_color"/>
             <t t-set="customer_address_color" t-value="o.company_id and o.company_id.customer_address_color"/>
             <t t-set="text_color" t-value="o.company_id and o.company_id.text_color"/>
-            <div class="page" t-att-style="'font-family:'+o.company_id.font_id.family+';font-size:'+str(o.company_id.font_size)+'px;'">
+            <div class="page"
+                 t-att-style="'font-family:'+o.company_id.font_id.family+';font-size:'+str(o.company_id.font_size)+'px;'">
                 <div class="oe_structure"/>
                 <t t-call="general_template.template_watermark"/>
                 <div class="container-fluid">
                     <div class="row" style="align-items: flex-end;">
                         <div class="col-6">
                             <t t-call="general_template.sale_templates_customer_details"/>
-                            <div t-attf-style="border-top:1px solid #{theme_color or '#000000'};width:60%;padding-top:10px;">
-                                <t t-call="general_template.sale_templates_invoice_customer_details"/>
-                                <t t-if="o.partner_shipping_id != o.partner_invoice_id">
-                                    <t t-call="general_template.sale_templates_invoice_customer_shipping_details"/>
-                                </t>
-                            </div>
-
                         </div>
                         <div class="col-6">
-                          <table class="table table-borderless" border="0" cellpadding="0" cellspacing="0" t-attf-style="color: #{o.company_id and o.company_id.theme_text_color or '#000000'};font-weight:bold;margin-top:2%; background-color: #{o.company_id and o.company_id.theme_color or '#000000'};border-radius: 10px;">
+                            <table class="table table-borderless" border="0" cellpadding="0" cellspacing="0"
+                                   t-attf-style="color: #{o.company_id and o.company_id.theme_text_color or '#000000'};font-weight:bold;margin-top:2%; background-color: #{o.company_id and o.company_id.theme_color or '#000000'};border-radius: 10px;">
                                 <tr t-if="o.date_order">
                                     <td style="padding:5px 15px;">
-                                        <b t-if="o.state not in ['draft','sent']">Date Ordered:</b>
-                                        <b t-if="o.state in ['draft','sent']">Quotation Date:</b>
+                                        <b t-if="o.state not in ['draft','sent']">Fecha de Pedido:</b>
+                                        <b t-if="o.state in ['draft','sent']">Fecha de cotización:</b>
                                     </td>
                                     <td style="text-align:right; padding:5px 15px;">
                                         <span t-field="o.date_order"/>
@@ -89,16 +118,16 @@
                                 <tr t-if="o.user_id">
                                     <td style="padding:5px 15px;">
                                         <b>
-                                            <b>Salesperson:</b>
+                                            <b>Cotizado por:</b>
                                         </b>
                                     </td>
                                     <td style="text-align:right;padding:5px 15px;">
-                                            <p t-field="o.user_id"/>
+                                        <p t-field="o.user_id"/>
                                     </td>
                                 </tr>
                                 <tr t-if="o.payment_term_id and o.payment_term_id.name or ''">
                                     <td style="padding:5px 15px;">
-                                        <b class="text-left">Payment Term:</b>
+                                        <b class="text-left">Condiciones de pago:</b>
                                     </td>
                                     <td style="text-align:right; padding:5px 15px;">
                                         <span t-esc="o.payment_term_id and o.payment_term_id.name or '' "/>
@@ -106,19 +135,13 @@
                                 </tr>
                                 <tr t-if="o.validity_date">
                                     <td style="padding:5px 15px;">
-                                        <b>Expiration Date:</b>
+                                        <b>Válido hasta:</b>
                                     </td>
                                     <td style="text-align:right; padding:5px 15px;">
                                         <span t-field="o.validity_date"/>
                                     </td>
                                 </tr>
                             </table>
-                            <div>
-                                <t t-if="o.company_id.name">
-                                    <strong>Pay to:</strong><br/>
-                                    <t t-call="general_template.templates_company_details"/>
-                                </t>
-                            </div>                              
                         </div>
                     </div>
                 </div>
@@ -141,8 +164,8 @@
                 <div class="container-fluid">
                     <div class="row" style="color: #{text_color or '#000000'};">
                         <div class="col-9">
-                        </div> 
-                        <div class="col-3">                       
+                        </div>
+                        <div class="col-3">
                             <t t-if="o.sale_is_show_signature == True">
                                 <t t-call="general_template.report_sale_signature"/>
                             </t>
@@ -160,7 +183,7 @@
     <template id="report_sale_order_custom_elegant">
         <t t-call="web.html_container">
             <t t-as="o" t-foreach="docs">
-                <t t-set="o" t-value="o.with_context(lang=lang)" /> 
+                <t t-set="o" t-value="o.with_context(lang=lang)"/>
                 <t t-call="general_template.report_sale_elegant_main" t-lang="lang"/>
             </t>
         </t>

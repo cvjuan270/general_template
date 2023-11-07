@@ -63,6 +63,10 @@
                                                                 <span t-attf-style="color: #{o.company_id and o.company_id.company_address_color or '#000000'};"
                                                                       t-field="o.company_id.website"/>
                                                             </t>
+                                                            <t t-if="o.company_id.company_details">
+                                                                <span t-attf-style="color: #{o.company_id and o.company_id.company_address_color or '#000000'};"
+                                                                      t-field="o.company_id.company_details"/>
+                                                            </t>
                                                         </td>
 
                                                         <td align="right" style="font-size:14px; padding:0; width:50%;"
@@ -100,7 +104,7 @@
                 </table>
 
                 <div>
-                    <p t-attf-style="border-bottom:1px solid #{theme_color};width:100%;padding:10px;"/>
+<!--                    <p t-attf-style="border-bottom:1px solid #{theme_color};width:100%;padding:10px;"/>-->
                 </div>
             </div>
         </template>
