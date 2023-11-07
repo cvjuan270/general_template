@@ -96,7 +96,7 @@
                                             <b>Fecha de Emisión:</b>
                                         </td>
                                         <td style="text-align:right; padding:5px 15px;">
-                                            <span t-esc="o._get_invoice_date()"/>
+                                            <span t-field="o.invoice_date"/>
                                         </td>
                                     </tr>
                                     <tr/>
@@ -114,7 +114,7 @@
                                             <b>Fecha de Vencimiento:</b>
                                         </td>
                                         <td style="text-align:right; padding:5px 15px;">
-                                            <span t-esc="o._get_invoice_due_date()"/>
+                                            <span t-field="o.invoice_date_due"/>
                                         </td>
                                     </tr>
                                     <tr t-if="o.source_id.name">
