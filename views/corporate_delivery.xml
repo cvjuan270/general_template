@@ -70,15 +70,15 @@
                                                             <span>RUC:
                                                                 <span t-esc="o.company_id.vat"/>
                                                             </span> <br/>
-                                                            <t t-if="o.l10n_pe_gre_status =='send'">
+                                                            <t t-if="o.l10n_pe_gre_status =='sent'">
                                                                 <span>GUÍA DE REMISIÓN ELECTRÓNICA</span>
                                                             </t>
                                                             <t t-else="">
                                                                 <span>NOTA DE ENTREGA</span>
                                                             </t>
                                                             <br/>
-                                                            <t t-if="o.l10n_pe_gre_status == 'send'">
-                                                                <span t-field="o.l10n_pe_gre_document_number"/>
+                                                            <t t-if="o.l10n_pe_gre_status == 'sent'">
+                                                                <span t-field="o.l10n_latam_document_number"/>
                                                             </t>
                                                             <t t-else="">
                                                                 <span t-field="o.name"/>
@@ -204,7 +204,7 @@
                                 </center>
                             </div>
                             <div class="col-6 p-1">
-                                <center>N. DE O/C: <t t-out="o.origin"/> </center>
+                                <center>N. DE O/C: <t t-out="o.origin"/></center>
                             </div>
                         </div>
                         <div t-attf-style="border: solid; border-radius: 10px; padding: 0; border-width: 2px; border-color: #{o.company_id and o.company_id.theme_color or '#000000'};">
@@ -230,7 +230,7 @@
                         </div>
                         <div style="height: 56px; border-bottom: solid; border-width: 2px; border-color: #188dc7;">
                             <center style="font-size: 11px; margin: 5px 5px 5px 5px;">
-                                <t t-esc="o.partner_id.name.upper()"/>
+                                <t t-esc="o.partner_id.name_get()[0][1]"/>
                             </center>
                         </div>
                         <div style="height:14px; padding:0.5rem;">
@@ -259,7 +259,23 @@
                     </div>
                     <div>
                         <div class="row">
-                            <div class="col-8"></div>
+                            <div class="col-8 p-2">
+                                <t t-if="o.l10n_pe_gre_status == 'sent' and o.l10n_pe_gre_DocumentDescription">
+                                    <p>DESCARGAR GUIA DE REMISIÓN ELECTRÓNICA DESDE SUNAT: <a
+                                            t-att-href="o.l10n_pe_gre_DocumentDescription"
+                                            t-attf-target="_blank">Descargar</a></p>
+                                    <p>
+                                        <div style="justify-content: center;align-items: center;">
+                                            <div style="text-align: center;">
+                                                <img t-if="o.l10n_pe_gre_DocumentDescription" class="p-2"
+                                                     style="background-color: #ffffff; border-radius:8px;"
+                                                     t-att-src="'/report/barcode/?barcode_type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('QR', o.l10n_pe_gre_DocumentDescription, 80, 80)"/>
+                                            </div>
+                                        </div>
+                                    </p>
+                                </t>
+
+                            </div>
                             <div class="col-4 p-4"
                                  t-attf-style="border: solid; border-radius: 10px; padding: 0; border-width: 2px; border-color: #{o.company_id and o.company_id.theme_color or '#000000'};">
                                 <div>
