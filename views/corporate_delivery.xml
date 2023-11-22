@@ -110,7 +110,6 @@
             <div class="page"
                  t-att-style="'font-family:'+o.company_id.font_id.family+';font-size:'+str(o.company_id.font_size)+'px;'">
                 <div class="oe_structure"/>
-                <t t-call="general_template.templates_watermark"/>
                 <!-- custom -->
                 <div class="row mb-2" style="margin-right: 0;">
                     <div class="col-6"
@@ -219,7 +218,7 @@
                                 <strong>NOMBRE TRANSPORTISTA: </strong><span
                                     t-field="o.l10n_pe_gre_operator_id"/><br/>
                                 <strong>DOC. TRANSPORTISTA: </strong><span
-                                    t-field="o.l10n_pe_gre_operator_id.l10n_pe_gre_operator_license"/>
+                                    t-field="o.l10n_pe_gre_operator_id.l10n_pe_gre_licencia"/>
                             </div>
                         </div>
                     </div>
