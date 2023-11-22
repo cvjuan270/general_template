@@ -248,8 +248,11 @@
         </table>
         <table cellpadding="0" cellspacing="0"
                t-if="o.move_line_ids" width="100%">
+            <!-- Validar si el producto tiene lote -->
             <t groups="stock.group_production_lot" t-set="has_serial_number"
                t-value="o.move_line_ids.mapped('lot_id')"/>
+            <!-- Validar si el producto tiene marca -->
+            <t t-set="has_brand" t-value="o.move_line_ids.mapped('product_id.product_brand_id')"/>
             <thead>
                 <tr t-attf-style="page-break-inside: avoid !important;background-color: #{theme_color or '#000000'}; color: #{theme_text_color or '#000000'};">
                     <td align="center"
@@ -269,42 +272,43 @@
                         t-if="has_serial_number" width="20%">F.V.</td>
                     <td align="right"
                         t-attf-style="padding:5px 12px; color: #{theme_text_color or '#000000'}; border:1px solid #{theme_color or '#000000'} !important; border-right:0px solid #{theme_color or '#000000'} !important; font-weight:bold;"
-                        width="20%">MARCA</td>
+                        width="20%" t-if="has_brand">MARCA</td>
                 </tr>
             </thead>
             <tbody>
                 <t t-as="pack_operation" t-foreach="o.move_line_ids">
-                    <tr >
-                        <td align="left" class="text-center">
+                    <tr>
+                        <td align="left" class="text-center" t-attf-style="padding:5px 12px; color: #{text_color or '#000000'}; font-weight:bold;">
                             <span t-esc="pack_operation_index+1"/>
                         </td>
                         <td align="left" class="text-left"
-                            t-attf-style="padding:5px 12px; color: #{theme_text_color or '#000000'}; font-weight:bold;">
+                            t-attf-style="padding:5px 12px; color: #{text_color or '#000000'}; font-weight:bold;">
                             <span t-field="pack_operation.product_id"/>
                             <p t-if="pack_operation.description_picking != pack_operation.product_id.name and pack_operation.description_picking != pack_operation.product_id.display_name">
                                 <span t-field="pack_operation.description_picking"/>
                             </p>
                         </td>
-                        <td align="right" class="text-right">
+                        <td align="right" class="text-right" t-attf-style="padding:5px 12px; color: #{text_color or '#000000'}; font-weight:bold;">
                             <span t-field="pack_operation.qty_done"/>
+                            <span> </span>
                             <span t-field="pack_operation.product_uom_id"/>
                         </td>
                         <t t-if="has_serial_number">
-                            <td align="right" class="text-right">
+                            <td align="right" class="text-right" t-attf-style="padding:5px 12px; color: #{text_color or '#000000'}; font-weight:bold;">
                                 <span t-field="pack_operation.lot_id"/>
                                 <t t-if="not pack_operation.lot_id">
                                     <span t-field="pack_operation.lot_id.name"/>
                                 </t>
                             </td>
-                            <td align="right" class="text-right">
+                            <td align="right" class="text-right" t-attf-style="padding:5px 12px; color: #{text_color or '#000000'}; font-weight:bold;">
                                 <span t-out="(pack_operation.lot_id.expiration_date - relativedelta(hours=5)).strftime('%d-%m-%Y')"/>
                             </td>
                         </t>
-
-                        <td align="right" class="text-right">
-                            <!--                                <span t-field="pack_operation.quantity_done"/>-->
-                            <!--                                <span t-field="pack_operation.product_uom"/>-->
-                        </td>
+                        <t t-if="has_brand" >
+                            <td align="right" class="text-right" t-attf-style="padding:5px 12px; color: #{text_color or '#000000'}; font-weight:bold;">
+                                <span t-field="pack_operation.product_id.product_brand_id"/>
+                            </td>
+                        </t>
                     </tr>
                 </t>
 
