@@ -389,7 +389,7 @@
     </template>
     <template id="sale_templates_suggested_order_line">
         <h2 t-attf-style="font-weight:bold; color: #{text_color or '#000000'};">
-            <span>Suggested Products</span>
+            <span>Productos Sugeridos</span>
         </h2>
         <table cellpadding="0" cellspacing="0" class="table"
                style="border:0.5px solid #ccc;  border-collapse: collapse; padding:15px; border-bottom:1px solid #ccc;"
@@ -402,20 +402,20 @@
                     <t t-if="o.company_id.add_product_image == True">
                         <td align="left"
                             t-attf-style="padding:5px 10px; border:1px solid #{theme_color or '#000000'} !important; border-right:0px solid #{theme_color or '#000000'} !important; font-weight:bold;"
-                            width="15%">Image</td>
+                            width="15%">Imagen</td>
                     </t>
                     <td align="left"
                         t-attf-style="padding:5px 10px; border:1px solid #{theme_color or '#000000'} !important; border-right:0px solid #{theme_color or '#000000'} !important; font-weight:bold;"
-                        width="15%">Product</td>
+                        width="15%">Producto</td>
                     <td align="left"
                         t-attf-style="padding:5px 10px; border:1px solid #{theme_color or '#000000'} !important; border-right:0px solid #{theme_color or '#000000'} !important; font-weight:bold;"
-                        width="52%">Description</td>
+                        width="52%">Descripción</td>
                     <td align="center" groups="sale.group_discount_per_so_line"
                         t-attf-style="padding:5px 10px; border:1px solid #{theme_color or '#000000'} !important; border-right:0px solid #{theme_color or '#000000'} !important; font-weight:bold;"
                         width="12%"/>
                     <td align="right"
                         t-attf-style="padding:5px 10px; border:1px solid #{theme_color or '#000000'} !important; border-right:0px solid #{theme_color or '#000000'} !important; font-weight:bold;"
-                        width="14%">Unit Price</td>
+                        width="14%">Precio Unitario</td>
                 </tr>
             </thead>
             <tbody>
