@@ -301,7 +301,8 @@
                                 </t>
                             </td>
                             <td align="right" class="text-right" t-attf-style="padding:5px 12px; color: #{text_color or '#000000'}; font-weight:bold;">
-                                <span t-out="(pack_operation.lot_id.expiration_date - relativedelta(hours=5)).strftime('%d-%m-%Y')"/>
+				    <!--<span t-out="(pack_operation.lot_id.expiration_date - relativedelta(hours=5)).strftime('%d-%m-%Y')"/>-->
+                                <span t-out="(pack_operation.lot_id.expiration_date - relativedelta(hours=5)).strftime('%d-%m-%Y')if pack_operation.lot_id else ''"/>
                             </td>
                         </t>
                         <t t-if="has_brand" >
