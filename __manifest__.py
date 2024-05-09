@@ -85,9 +85,9 @@
             'general_template/static/src/css/template.css',
         ],
     },
-    'external_dependencies': {
-        'python': ['img2pdf', 'fpdf', 'num2words']
-    },
+    # 'external_dependencies': {
+    #     'python': ['img2pdf', 'fpdf', 'num2words']
+    # },
     'images': ['static/description/splash-screen.png'],
     'installable': True,
     'auto_install': False,

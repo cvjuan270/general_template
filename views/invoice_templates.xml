@@ -440,6 +440,47 @@
     </template>
 
     <template id="report_cuotas_custom">
+        <!-- RETENCIONES -->
+        <t t-set="retention" t-value="o._l10n_pe_cpe_get_retention()"/>
+        <t t-if="retention">
+            <table BORDERCOLOR="#{theme_color or '#000000'}" border="1" cellpadding="0" cellspacing="0"
+               class="table table-bordered"
+               style="border:0.5px solid #ccc;  border-collapse: collapse; text-transform:capitalize; padding:15px;border-bottom:1px solid #ccc;"
+               width="100%">
+                <thead>
+                    <tr t-attf-style="background-color: #{theme_color or '#000000'}; color: #{theme_text_color or '#000000'};">
+                        <td align="center"
+                            t-attf-style="padding:5px 10px; border:1px solid #{theme_color or '#000000'} !important; border-right:0px solid #{theme_color or '#000000'} !important; font-weight:bold;"
+                            width="33%">BASE IMPONIBLE RETENCION</td>
+                        <td align="center"
+                            t-attf-style="padding:5px 10px; border:1px solid #{theme_color or '#000000'} !important; border-right:0px solid #{theme_color or '#000000'} !important; font-weight:bold;"
+                            width="33%">PORCENTAJE RETENCION %</td>
+                        <td align="center"
+                            t-attf-style="padding:5px 10px; border:1px solid #{theme_color or '#000000'} !important; border-right:0px solid #{theme_color or '#000000'} !important; font-weight:bold;"
+                            width="34%">MONTO DE LA RETENCION</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr t-att-style="'color: %s'">
+                        <td class="text-center"
+                            t-att-style="'padding:5px 10px; border:0.5px solid #ccc !important; border-right:0px solid #ccc !important; '">
+                            <span t-out="retention['amount_total']"/>
+                        </td>
+                        <td class="text-center"
+                            t-att-style="'padding:5px 10px; border:0.5px solid #ccc !important; border-right:0px solid #ccc !important; '">
+                            <span t-out="retention['amount_retention']"/>
+                        </td>
+                        <td class="text-center"
+                            t-att-style="'padding:5px 10px; border:0.5px solid #ccc !important; border-right:0px solid #ccc !important; '">
+                            <span t-out="retention['retention_amount_currency']"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <br/>
+        </t>
+        <!-- END RETENCIONES -->
+
         <table BORDERCOLOR="#{theme_color or '#000000'}" border="1" cellpadding="0" cellspacing="0"
                class="table table-bordered"
                style="border:0.5px solid #ccc;  border-collapse: collapse; text-transform:capitalize; padding:15px;border-bottom:1px solid #ccc;"
@@ -462,11 +503,21 @@
             </thead>
             <tbody>
                 <t t-set="spot1" t-value="o._l10n_pe_cpe_get_spot()"/>
+                <t t-set="retention" t-value="o._l10n_pe_cpe_get_retention()"/>
                 <t t-set="first_time" t-value="True"/>
                 <t t-foreach="o.line_ids.filtered(lambda l: l.account_type == 'asset_receivable')" t-as="rec_line">
                     <t t-set="amount" t-value="rec_line.amount_currency"/>
+                    <!-- SPOT -->
                     <t t-if="spot1 and first_time">
                         <t t-set="amount" t-value="amount-spot1['spot_amount']"/>
+                    </t>
+                    <!-- RETENTION -->
+                    <t t-if="retention and first_time">
+                        <t t-set="amount" t-value="amount-retention['retention_amount_currency']"/>
+                    </t>
+                    <!-- SPOT + RETENTION-->
+                     <t t-if="spot1 and retention and first_time">
+                        <t t-set="amount" t-value="amount-(spot1['spot_amount']+retention['retention_amount_currency'])"/>
                     </t>
                     <t t-set="first_time" t-value="False"/>
                     <tr t-att-style="'color: %s'">

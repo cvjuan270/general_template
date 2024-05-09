@@ -3,10 +3,10 @@
 
 import os
 import tempfile
-import img2pdf
+# import img2pdf
 import subprocess
 import base64
-from fpdf import FPDF
+# from fpdf import FPDF
 from contextlib import closing
 from odoo import fields, models, api, _
 from odoo.exceptions import UserError
