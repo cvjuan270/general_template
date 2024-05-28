@@ -147,19 +147,28 @@
                         <div class="row" style="color: #{text_color or '#000000'};">
                             <div class="col-9">
                             </div>
-                            <div class="col-3">
+                            <!-- <div class="col-3">
                                 <t t-if="o.sale_is_show_signature == True">
                                     <t t-call="general_template.report_sale_signature"/>
                                 </t>
                                 <t t-else="">
                                     <t t-call="general_template.report_signature"/>
                                 </t>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
                 <t t-call="general_template.report_barcode"/>
+
+                <!-- show notes -->
                 <div class="oe_structure"/>
+                <div class="row">
+                    <div class="col-8">
+                        <div style="color: #{text_color or '#000000'}; padding-top:10px;">
+                            <p><t t-out="o.note"/></p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </t>
     </template>
