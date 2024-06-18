@@ -260,6 +260,11 @@
                     <div>
                         <div class="row">
                             <div class="col-8 p-2">
+                                <t t-if="o.l10n_pe_gre_observation and o.l10n_pe_gre_status == 'sent'">
+                                    <strong>OBSERVACIONES:</strong>
+                                    <span t-field="o.l10n_pe_gre_observation"/>
+                                    <br/>
+                                </t>
                                 <t t-if="o.l10n_pe_gre_status == 'sent' and o.l10n_pe_gre_DocumentDescription">
                                     <p>DESCARGAR GUIA DE REMISIÓN ELECTRÓNICA DESDE SUNAT: <a
                                             t-att-href="o.l10n_pe_gre_DocumentDescription"
