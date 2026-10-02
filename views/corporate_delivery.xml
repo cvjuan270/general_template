@@ -260,7 +260,10 @@
                     </div>
                     <div>
                         <div class="row">
-                            <div class="col-8"></div>
+                            <div class="col-8">
+                                <img t-if="o.l10n_pe_edi_stock_DocumentDescription"
+                                     t-att-src="'/report/barcode/?barcode_type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('QR', o.l10n_pe_edi_stock_DocumentDescription, 150, 150)"/>
+                            </div>
                             <div class="col-4 p-4"
                                  t-attf-style="border: solid; border-radius: 10px; padding: 0; border-width: 2px; border-color: #{o.company_id and o.company_id.theme_color or '#000000'};">
                                 <div>
